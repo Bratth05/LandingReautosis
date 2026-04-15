@@ -1,0 +1,26 @@
+/* ============================================
+   PUNTO DE ENTRADA DE ESTILOS - ReAuto
+   ============================================
+   Este archivo es la raíz de todos los estilos
+   compartidos del proyecto. Importa todos los
+   módulos CSS en el orden correcto.
+   ============================================ */
+
+/* 1. Variables CSS */
+@import './variables.css';
+
+/* 2. Tipografía y Fuentes */
+@import './typography.css';
+
+/* 3. Tailwind CSS (Framework principal) */
+@import 'tailwindcss';
+
+/* 4. Estilos Globales */
+@import './global.css';
+
+/* 5. Utilidades Compartidas */
+@import './utilities.css';
+
+/* ============================================
+   FIN DE IMPORTACIONES DE ESTILOS
+   ============================================ */

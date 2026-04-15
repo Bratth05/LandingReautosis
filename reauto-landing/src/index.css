@@ -1,6 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --brand-deep-blue: #0b1e4a;
+  --brand-blue: #1e4fa2;
+  --brand-gray: #334155;
+  --brand-light: #f8fafc;
+}
 
 * {
   margin: 0;
@@ -13,7 +20,9 @@ html {
 }
 
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: #0f172a;
 }
 
 #root {
@@ -21,17 +30,6 @@ body {
   min-height: 100vh;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+a {
+  color: inherit;
 }

@@ -1,20 +1,20 @@
 export default function Locations() {
   return (
-    <section id="ubicacion" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="ubicacion" className="bg-white py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Nuestra <span className="text-orange-600">Ubicación</span>
+          <h2 className="mb-4 text-4xl font-bold text-slate-900 md:text-5xl">
+            Nuestra <span className="text-[#1E4FA2]">Ubicación</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-lg text-slate-600">
             Visitanos en San Pedro Sula o contactanos para entregas a domicilio en toda Honduras
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Map */}
-          <div className="rounded-2xl overflow-hidden shadow-xl h-96">
+          <div className="h-96 overflow-hidden rounded-2xl shadow-xl">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3735.467635421937!2d-88.01865!3d15.49832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f62d5a9c5a5a5a5%3A0x5a5a5a5a5a5a5a5a!2sReAuto%20San%20Pedro%20Sula!5e0!3m2!1ses!2shn!4v1234567890"
               className="w-full h-full"
@@ -27,22 +27,22 @@ export default function Locations() {
 
           {/* Contact Info */}
           <div className="space-y-8">
-            <div className="bg-gradient-to-br from-orange-50 to-red-50 p-8 rounded-xl border-l-4 border-orange-600">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="rounded-xl border-l-4 border-[#1E4FA2] bg-gradient-to-br from-[#EAF0FC] to-white p-8">
+              <h3 className="mb-4 flex items-center gap-2 text-2xl font-bold text-slate-900">
+                <svg className="h-6 w-6 text-[#1E4FA2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 San Pedro Sula, Cortés
               </h3>
-              <p className="text-gray-700 mb-4">
+              <p className="mb-4 text-slate-700">
                 Estamos ubicados estratégicamente en San Pedro Sula para ofrecerte entregas rápidas en 24 horas.
               </p>
               <a
                 href="https://share.google.com/FmayHStPw4DXfI22F"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 font-bold transition"
+                className="inline-flex items-center gap-2 font-bold text-[#1E4FA2] transition hover:text-[#0B1E4A]"
               >
                 Ver en Google Maps
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -53,8 +53,8 @@ export default function Locations() {
 
             <div className="space-y-4">
               {/* WhatsApp */}
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-l-4 border-green-600">
-                <h4 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+              <div className="rounded-xl border-l-4 border-green-600 bg-gradient-to-br from-green-50 to-emerald-50 p-6">
+                <h4 className="mb-2 flex items-center gap-2 text-lg font-bold text-slate-900">
                   <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371 0-.57 0-.198 0-.52.075-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.868 1.159l-.359.214-3.734-.982.998 3.645-.235.374a9.861 9.861 0 001.516 5.394l.244.368 3.888.776-.375-.343a9.882 9.882 0 004.933-1.159l.355-.212 3.732.981-.998-3.645.235-.374a9.861 9.861 0 00-1.516-5.394l-.244-.368-3.886-.776z" />
                   </svg>
@@ -68,12 +68,12 @@ export default function Locations() {
                 >
                   +504 9520-6007
                 </a>
-                <p className="text-gray-600 mt-2">Disponible 24/7 para tus consultas</p>
+                <p className="mt-2 text-slate-600">Disponible 24/7 para tus consultas</p>
               </div>
 
               {/* Social Media */}
               <div className="space-y-3">
-                <h4 className="text-lg font-bold text-gray-900">Síguenos en redes sociales</h4>
+                <h4 className="text-lg font-bold text-slate-900">Síguenos en redes sociales</h4>
                 <div className="flex gap-3">
                   <a
                     href="https://www.facebook.com/p/Reauto-100086985931443/"

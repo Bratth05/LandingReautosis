@@ -1,85 +1,105 @@
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: 'smooth' });
+  const navItems = [
+    { label: 'Inicio', to: '/inicio' },
+    { label: 'Contacto', to: '/contacto' },
+    { label: 'Sobre Nosotros', to: '/sobre-nosotros' },
+  ];
+
+  const isActive = (to: string) => location.pathname === to;
+
+  const closeMenu = () => {
     setIsOpen(false);
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-lg">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <header className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm">
+      <nav className="mx-auto max-w-full px-6 lg:px-12">
+        <div className="flex h-14 items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">R</span>
+          <Link to="/inicio" className="flex items-center gap-2 flex-shrink-0" onClick={closeMenu}>
+            <div className="flex h-8 w-8 items-center justify-center rounded bg-blue-600">
+              <span className="text-white font-bold text-sm">R</span>
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">ReAuto</h1>
-              <p className="text-xs text-gray-600">Repuestos y Accesorios</p>
+            <div className="hidden sm:block">
+              <h1 className="text-sm font-bold text-slate-900 dark:text-white">ReAuto</h1>
             </div>
-          </a>
+          </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex gap-8">
-            <button onClick={() => scrollToSection('servicios')} className="text-gray-700 hover:text-orange-600 transition font-medium">
-              Servicios
-            </button>
-            <button onClick={() => scrollToSection('ubicacion')} className="text-gray-700 hover:text-orange-600 transition font-medium">
-              Ubicación
-            </button>
-            <button onClick={() => scrollToSection('contacto')} className="text-gray-700 hover:text-orange-600 transition font-medium">
-              Contacto
-            </button>
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                onClick={closeMenu}
+                className={`text-sm font-semibold transition ${
+                  isActive(item.to)
+                    ? 'text-blue-600 dark:text-blue-400'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
 
-          {/* CTA Button */}
+          {/* WhatsApp CTA */}
           <a
-            href="https://wa.me/50495206007?text=Hola%20ReAuto,%20me%20gustaría%20conocer%20más%20de%20sus%20servicios"
+            href="https://wa.me/50495206007?text=Hola%20ReAuto,%20me%20gustaría%20conocer%20más%20de%20sus%20repuestos"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition"
+            className="hidden sm:inline-flex text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition"
           >
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10.5 1.5H3.75A2.25 2.25 0 001.5 3.75v12.5A2.25 2.25 0 003.75 18.5h12.5a2.25 2.25 0 002.25-2.25V9.5m-15-4h12m-12 4v8m12-8v8m-12-8h12" />
-            </svg>
             WhatsApp
           </a>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-700"
+            className="lg:hidden text-slate-700 dark:text-slate-300"
+            aria-label="Menú"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
             </svg>
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden pb-4 space-y-2">
-            <button onClick={() => scrollToSection('servicios')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-orange-50 rounded">
-              Servicios
-            </button>
-            <button onClick={() => scrollToSection('ubicacion')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-orange-50 rounded">
-              Ubicación
-            </button>
-            <button onClick={() => scrollToSection('contacto')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-orange-50 rounded">
-              Contacto
-            </button>
+          <div className="lg:hidden border-t border-slate-200 dark:border-slate-800 py-3 space-y-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                onClick={closeMenu}
+                className={`block px-4 py-2 text-sm font-medium rounded transition ${
+                  isActive(item.to)
+                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                    : 'text-slate-700 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
             <a
-              href="https://wa.me/50495206007?text=Hola%20ReAuto,%20me%20gustaría%20conocer%20más%20de%20sus%20servicios"
+              href="https://wa.me/50495206007?text=Hola%20ReAuto,%20me%20gustaría%20conocer%20más%20de%20sus%20repuestos"
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full text-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition"
+              className="block w-full text-center text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition"
+              onClick={closeMenu}
             >
-              WhatsApp
+              Contactar por WhatsApp
             </a>
           </div>
         )}

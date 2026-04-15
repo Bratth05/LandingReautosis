@@ -33,14 +33,14 @@ export default function Services() {
   ];
 
   return (
-    <section id="servicios" className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="servicios" className="bg-slate-50 py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            ¿Por qué elegir <span className="text-orange-600">ReAuto</span>?
+          <h2 className="mb-4 text-4xl font-bold text-slate-900 md:text-5xl">
+            ¿Por qué elegir <span className="text-[#1E4FA2]">ReAuto</span>?
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-lg text-slate-600">
             Somos tu aliado confiable en repuestos y accesorios automotrices con más de 10 años de experiencia
           </p>
         </div>
@@ -50,13 +50,13 @@ export default function Services() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2"
+              className="rounded-xl border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
             >
               <div className="text-5xl mb-4">{service.icon}</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
+              <h3 className="mb-2 text-xl font-bold text-slate-900">
                 {service.title}
               </h3>
-              <p className="text-gray-600">
+              <p className="text-slate-600">
                 {service.description}
               </p>
             </div>
@@ -64,17 +64,17 @@ export default function Services() {
         </div>
 
         {/* Additional info */}
-        <div className="mt-16 bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl p-8 md:p-12 border-2 border-orange-200">
+        <div className="mt-16 rounded-2xl border border-[#BFD1F3] bg-gradient-to-r from-[#EAF0FC] to-white p-8 md:p-12">
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Misión</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="mb-4 text-2xl font-bold text-slate-900">Misión</h3>
+              <p className="leading-relaxed text-slate-700">
                 Proporcionar repuestos y accesorios automotrices de la más alta calidad a precios justos, con un servicio al cliente excepcional y entregas rápidas en todo Honduras.
               </p>
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Visión</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="mb-4 text-2xl font-bold text-slate-900">Visión</h3>
+              <p className="leading-relaxed text-slate-700">
                 Ser la tienda de repuestos automotrices más confiable y accesible de Honduras, reconocida por nuestra calidad, servicio y compromiso con nuestros clientes.
               </p>
             </div>
