@@ -45,7 +45,7 @@ export default function Header() {
                 ReAuto
               </p>
               <p className="font-body text-[11px] uppercase tracking-[0.36em] text-slate-500">
-                Repuestos tecnicos
+                Repuestos y Accesorios
               </p>
             </div>
           </Link>

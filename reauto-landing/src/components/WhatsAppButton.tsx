@@ -14,9 +14,9 @@ export default function WhatsAppButton() {
       </span>
       <span className="hidden sm:block">
         <span className="block font-headline text-[11px] font-bold uppercase tracking-[0.28em] text-slate-400 transition-colors group-hover:text-emerald-100">
-          Soporte directo
+          Cotiza en línea
         </span>
-        <span className="block font-body text-sm text-white">WhatsApp ReAuto</span>
+        <span className="block font-body text-sm text-white">¡Escríbenos!</span>
       </span>
     </a>
   );
