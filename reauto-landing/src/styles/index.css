@@ -6,20 +6,23 @@
    módulos CSS en el orden correcto.
    ============================================ */
 
-/* 1. Variables CSS */
+/* 1. Tailwind CSS PRIMERO — sus @layer base/utilities
+      deben cargarse antes de los estilos propios para
+      que las utilidades (px-*, py-*, etc.) NO sean
+      sobreescritas por el reset global `*`.            */
+@import 'tailwindcss';
+
+/* 2. Variables CSS */
 @import './variables.css';
 
-/* 2. Tipografía y Fuentes */
+/* 3. Tipografía y Fuentes */
 @import './typography.css';
 
-/* 3. Estilos Globales */
+/* 4. Estilos Globales */
 @import './global.css';
 
-/* 4. Utilidades Compartidas */
+/* 5. Utilidades Compartidas */
 @import './utilities.css';
-
-/* 5. Tailwind CSS (Framework principal) */
-@import 'tailwindcss';
 
 /* ============================================
    FIN DE IMPORTACIONES DE ESTILOS
