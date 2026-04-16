@@ -1,91 +1,135 @@
-import { useState } from 'react';
-import { Seo, InfoCard, FormField } from '../components';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
+
+import { FormField, Icon, InfoCard, Seo } from '../components';
 import { CONTACT_INFO, SOCIAL_LINKS } from '../constants/data';
 
-/**
- * Página de Contacto - ReAuto
- * ✅ Clean Code: Componentes reutilizables
- * ✅ SOLID: Datos centralizados en constants
- * ✅ Sin duplicación: Usa mapping de arrays para tarjetas y servicios
- */
+const additionalServices = [
+  {
+    icon: 'document' as const,
+    title: 'Cotizaciones rapidas',
+    description: 'Preparamos solicitudes de precio claras para repuestos, accesorios y piezas especiales.',
+  },
+  {
+    icon: 'compatibility' as const,
+    title: 'Revision de compatibilidad',
+    description: 'Validamos referencia, vehiculo y observaciones tecnicas antes de confirmar la compra.',
+  },
+  {
+    icon: 'tracking' as const,
+    title: 'Seguimiento de pedido',
+    description: 'Mantenemos comunicacion sobre disponibilidad, despacho y avance de entrega.',
+  },
+];
+
 export default function Contacto() {
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
     partNumber: '',
     subject: 'oem',
+    message: '',
   });
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement form submission logic
-    console.log('Form submitted:', formData);
-  };
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
 
-  const additionalServices = [
-    { icon: '📋', title: 'Cotizaciones Rápidas', description: 'Obtén presupuestos para tus repuestos en menos de 1 hora' },
-    { icon: '🔍', title: 'Verificación de Compatibilidad', description: 'Confirma que el repuesto es compatible con tu vehículo' },
-    { icon: '📦', title: 'Seguimiento de Pedidos', description: 'Rastreo completo del estado de tu entrega' },
-  ];
+    const message = [
+      'Hola ReAuto, necesito apoyo con la siguiente solicitud:',
+      `Nombre: ${formData.fullName}`,
+      `Telefono: ${formData.phone}`,
+      `Asunto: ${formData.subject}`,
+      `Numero de parte: ${formData.partNumber || 'No especificado'}`,
+      `Detalle: ${formData.message}`,
+    ].join('\n');
+
+    const whatsappRequestUrl = `https://wa.me/50495206007?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappRequestUrl, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <>
       <Seo
         title="Contacto"
-        description="Contacta a ReAuto - Repuestos automotrices en Honduras. WhatsApp, teléfono y ubicación en San Pedro Sula."
+        description="Contacta a ReAuto para soporte tecnico, compatibilidad OEM, cotizaciones y entregas en Honduras."
         path="/contacto"
-        keywords="contacto ReAuto, WhatsApp ReAuto, ubicacion ReAuto, soporte técnico"
+        keywords="contacto ReAuto, WhatsApp ReAuto, ubicacion ReAuto, soporte tecnico"
       />
 
-      <main className="min-h-screen">
-        {/* Hero Section */}
-        <div className="relative py-16 md:py-24 px-6 md:px-8 overflow-hidden bg-surface-container-low border-b border-outline-variant/10">
-          <div className="relative z-10 max-w-7xl mx-auto">
-            <div className="inline-flex items-center gap-2 mb-6">
-              <span className="w-12 h-[2px] bg-primary"></span>
-              <span className="font-headline text-primary uppercase tracking-widest text-xs font-bold">Soporte Técnico</span>
-            </div>
-            <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-on-surface mb-6 max-w-4xl">
-              Contacta con ReAuto
-            </h1>
-            <p className="font-body text-lg md:text-xl text-on-surface-variant max-w-2xl leading-relaxed">
-              Acceso directo a nuestro equipo de soporte. Resolvemos especificaciones OEM, verificamos compatibilidad y coordinamos entregas en Honduras.
-            </p>
-          </div>
-        </div>
+      <main className="bg-[#f3f4f8]">
+        <div className="mx-auto max-w-7xl space-y-8 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+          <section className="grid gap-6 rounded-[32px] border border-slate-200 bg-slate-950 p-6 text-white shadow-[0_24px_60px_rgba(15,23,42,0.10)] md:p-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
+            <div>
+              <div className="inline-flex items-center gap-3">
+                <span className="h-px w-14 bg-blue-400" />
+                <span className="font-headline text-[11px] font-bold uppercase tracking-[0.34em] text-blue-200">
+                  Soporte tecnico
+                </span>
+              </div>
 
-        {/* Information & Form Layout */}
-        <section className="px-6 md:px-8 py-12 md:py-16 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
-            {/* Contact Information Cards */}
-            <div className="lg:col-span-5 space-y-6 md:space-y-8">
+              <h1 className="mt-6 max-w-4xl font-headline text-4xl font-bold uppercase leading-[1.02] tracking-tight text-white md:text-5xl">
+                Contacto operativo para repuestos, compatibilidad y despacho.
+              </h1>
+
+              <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
+                Esta vista ahora esta pensada como un panel claro: menos ruido, mas orden visual y
+                una accion principal evidente para convertir consultas en conversaciones utiles.
+              </p>
+            </div>
+
+            <div className="grid gap-3">
+              <div className="rounded-[24px] border border-white/10 bg-white/6 p-5">
+                <p className="font-headline text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">
+                  Canal principal
+                </p>
+                <p className="mt-2 font-headline text-2xl font-bold text-white">WhatsApp</p>
+                <p className="mt-2 text-sm text-slate-300">+504 9520-6007</p>
+              </div>
+              <div className="rounded-[24px] border border-white/10 bg-white/6 p-5">
+                <p className="font-headline text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">
+                  Horario
+                </p>
+                <p className="mt-2 text-sm leading-7 text-slate-300">Lunes a sabado, 8:00 AM - 6:00 PM</p>
+              </div>
+              <div className="rounded-[24px] border border-white/10 bg-white/6 p-5">
+                <p className="font-headline text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">
+                  Cobertura
+                </p>
+                <p className="mt-2 text-sm leading-7 text-slate-300">San Pedro Sula y envios a nivel nacional</p>
+              </div>
+            </div>
+          </section>
+
+          <section className="grid gap-6 lg:grid-cols-[21rem_minmax(0,1fr)]">
+            <div className="space-y-5">
               <InfoCard {...CONTACT_INFO.mainOffice} />
               <InfoCard {...CONTACT_INFO.technicalSupport} />
               <InfoCard {...CONTACT_INFO.shipping} />
             </div>
 
-            {/* Contact Form */}
-            <div className="lg:col-span-7 bg-surface-container shadow-sm border border-outline-variant/20 p-6 md:p-10 rounded-lg">
-              <div className="mb-8 md:mb-10">
-                <h2 className="font-headline text-2xl md:text-3xl font-bold tracking-tight mb-2 text-on-surface">
-                  Solicitud Técnica
+            <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_16px_34px_rgba(15,23,42,0.05)] md:p-8">
+              <div className="mb-8 border-b border-slate-200 pb-5">
+                <p className="font-headline text-[11px] font-bold uppercase tracking-[0.32em] text-blue-700">
+                  Formulario tecnico
+                </p>
+                <h2 className="mt-3 font-headline text-3xl font-bold uppercase tracking-tight text-slate-950 md:text-4xl">
+                  Solicitud de compatibilidad o cotizacion
                 </h2>
-                <p className="font-body text-on-surface-variant">
-                  Envía tu consulta de repuestos o compatibilidad. Responderemos a la brevedad.
+                <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
+                  Llena los datos base y abrimos WhatsApp con un mensaje mas estructurado. La idea
+                  es que el siguiente paso sea claro y rapido.
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid gap-5 md:grid-cols-2">
                   <FormField
-                    label="Nombre Completo"
+                    label="Nombre completo"
                     type="text"
                     name="fullName"
                     placeholder="Tu nombre"
@@ -94,7 +138,7 @@ export default function Contacto() {
                     required
                   />
                   <FormField
-                    label="Teléfono/WhatsApp"
+                    label="Telefono o WhatsApp"
                     type="tel"
                     name="phone"
                     placeholder="+504 XXXX-XXXX"
@@ -104,9 +148,9 @@ export default function Contacto() {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid gap-5 md:grid-cols-2">
                   <FormField
-                    label="Número de Parte (Opcional)"
+                    label="Numero de parte"
                     type="text"
                     name="partNumber"
                     placeholder="Ej: PP-9902-BX"
@@ -120,10 +164,10 @@ export default function Contacto() {
                     value={formData.subject}
                     onChange={handleInputChange}
                     options={[
-                      { label: 'Consulta Técnica OEM', value: 'oem' },
-                      { label: 'Verificar Compatibilidad', value: 'compatibility' },
-                      { label: 'Cotización de Repuestos', value: 'quote' },
-                      { label: 'Estado de Envío', value: 'shipping' },
+                      { label: 'Consulta tecnica OEM', value: 'oem' },
+                      { label: 'Verificar compatibilidad', value: 'compatibility' },
+                      { label: 'Cotizacion de repuestos', value: 'quote' },
+                      { label: 'Estado de envio', value: 'shipping' },
                       { label: 'Otro', value: 'other' },
                     ]}
                     required
@@ -134,59 +178,120 @@ export default function Contacto() {
                   label="Mensaje"
                   type="textarea"
                   name="message"
-                  placeholder="Describe tu consulta en detalle..."
-                  rows={5}
+                  placeholder="Describe tu consulta, modelo del vehiculo o referencia de la pieza..."
+                  rows={6}
+                  value={formData.message}
+                  onChange={handleInputChange}
                   required
                 />
 
-                <div className="pt-4">
+                <div className="flex flex-col gap-4 rounded-[24px] bg-slate-50 p-5 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="max-w-xl text-sm leading-7 text-slate-600">
+                    Al enviar, abriremos WhatsApp con tu solicitud estructurada para agilizar la
+                    respuesta del equipo.
+                  </p>
                   <button
                     type="submit"
-                    className="w-full h-14 bg-primary text-on-primary font-headline font-bold uppercase tracking-wider hover:bg-primary-container transition-all flex items-center justify-center gap-3 rounded"
+                    className="inline-flex items-center justify-center gap-3 rounded-2xl bg-slate-950 px-6 py-4 font-headline text-[11px] font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-blue-700"
                   >
-                    <span>Enviar Solicitud</span>
-                    <span>📤</span>
+                    <span>Enviar solicitud</span>
+                    <Icon name="arrow-right" className="h-4 w-4" />
                   </button>
-                  <p className="mt-4 text-[10px] text-on-surface-variant font-headline text-center">
-                    Transmisión segura - Tu información está protegida
-                  </p>
                 </div>
               </form>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Map Section */}
-        <section className="w-full h-80 md:h-96 relative mt-12 md:mt-16 group">
-          <iframe
-            title="Ubicación de ReAuto"
-            src={SOCIAL_LINKS.maps}
-            className="w-full h-full"
-            style={{ border: 0 }}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
-        </section>
+          <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
+            <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_16px_34px_rgba(15,23,42,0.05)]">
+              <iframe
+                title="Ubicacion de ReAuto"
+                src={SOCIAL_LINKS.maps}
+                className="min-h-[24rem] w-full"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
 
-        {/* Additional Services Section */}
-        <section className="px-6 md:px-8 py-12 md:py-16 max-w-7xl mx-auto">
-          <h2 className="font-headline text-2xl md:text-3xl font-bold tracking-tight mb-8 md:mb-12 text-on-surface">
-            Servicios Disponibles
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {additionalServices.map((service) => (
-              <div
-                key={service.title}
-                className="bg-surface-container-lowest p-6 md:p-8 border border-outline-variant/20 rounded-lg hover:shadow-lg transition-shadow"
-              >
-                <div className="text-3xl md:text-4xl mb-4">{service.icon}</div>
-                <h3 className="font-headline text-lg font-bold text-on-surface mb-2">{service.title}</h3>
-                <p className="font-body text-sm text-on-surface-variant">{service.description}</p>
+            <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_16px_34px_rgba(15,23,42,0.05)]">
+              <p className="font-headline text-[11px] font-bold uppercase tracking-[0.32em] text-blue-700">
+                Punto fisico
+              </p>
+              <h2 className="mt-3 font-headline text-3xl font-bold uppercase tracking-tight text-slate-950">
+                San Pedro Sula
+              </h2>
+              <p className="mt-4 text-sm leading-7 text-slate-600">
+                Coordinamos entregas, retiro y consultas para clientes locales y cobertura
+                nacional.
+              </p>
+
+              <div className="mt-6 space-y-3">
+                <a
+                  href={SOCIAL_LINKS.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  <span>WhatsApp</span>
+                  <Icon name="whatsapp" className="h-4 w-4" />
+                </a>
+                <a
+                  href={SOCIAL_LINKS.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  <span>Facebook</span>
+                  <Icon name="facebook" className="h-4 w-4" />
+                </a>
+                <a
+                  href={SOCIAL_LINKS.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  <span>Instagram</span>
+                  <Icon name="instagram" className="h-4 w-4" />
+                </a>
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
+          </section>
+
+          <section className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_16px_34px_rgba(15,23,42,0.05)] md:p-8">
+            <div className="mb-8 border-b border-slate-200 pb-5 md:flex md:items-end md:justify-between">
+              <div>
+                <p className="font-headline text-[11px] font-bold uppercase tracking-[0.32em] text-blue-700">
+                  Flujo de atencion
+                </p>
+                <h2 className="mt-3 font-headline text-3xl font-bold uppercase tracking-tight text-slate-950 md:text-4xl">
+                  Servicios disponibles en esta vista
+                </h2>
+              </div>
+              <p className="mt-4 font-headline text-[11px] uppercase tracking-[0.28em] text-slate-400 md:mt-0">
+                Panel visual mas limpio y ordenado
+              </p>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-3">
+              {additionalServices.map((service) => (
+                <article
+                  key={service.title}
+                  className="rounded-[28px] border border-slate-200 bg-slate-50 p-6"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-700">
+                    <Icon name={service.icon} className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-6 font-headline text-2xl font-bold tracking-tight text-slate-950">
+                    {service.title}
+                  </h3>
+                  <p className="mt-4 text-sm leading-7 text-slate-600">{service.description}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        </div>
       </main>
     </>
   );

@@ -1,107 +1,139 @@
 import { Link } from 'react-router-dom';
 
-const quickLinks = [
+import Icon from './Icon';
+
+const navigationLinks = [
   { label: 'Inicio', to: '/inicio' },
+  { label: 'Catalogo', to: '/inicio#productos' },
   { label: 'Servicios', to: '/inicio#servicios' },
-  { label: 'Ubicación', to: '/inicio#ubicacion' },
-  { label: 'Contacto', to: '/contacto' },
-  { label: 'Sobre Nosotros', to: '/sobre-nosotros' },
 ];
 
-const legalLinks = [
-  { label: 'Políticas y Términos', to: '/politicas' },
-  { label: 'Privacidad', to: '/politicas#privacidad' },
-  { label: 'Cookies', to: '/politicas#cookies' },
-  { label: 'Términos', to: '/politicas#terminos' },
+const companyLinks = [
+  { label: 'Contacto', to: '/contacto' },
+  { label: 'Sobre nosotros', to: '/sobre-nosotros' },
+  { label: 'Politicas', to: '/politicas' },
+];
+
+const supportLinks = [
+  { label: 'Compatibilidad OEM', to: '/contacto' },
+  { label: 'Solicitud tecnica', to: '/contacto' },
+  { label: 'Cobertura nacional', to: '/contacto' },
 ];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0B1E4A] text-white">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-4">
-          <div>
-            <div className="mb-4 flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#1E4FA2]">
-                <span className="text-xl font-bold">R</span>
+    <footer className="mt-auto bg-slate-950 text-white">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="grid gap-10 rounded-[32px] border border-white/10 bg-white/5 p-8 backdrop-blur-sm md:grid-cols-4">
+          <div className="md:col-span-1">
+            <div className="mb-6 flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-[18px] bg-blue-600/15 text-blue-300">
+                <span className="font-headline text-xl font-bold">R</span>
               </div>
               <div>
-                <h3 className="text-xl font-bold">ReAuto</h3>
-                <p className="text-xs text-blue-100">Repuestos y Accesorios</p>
+                <p className="font-headline text-3xl font-bold tracking-tight text-blue-300">ReAuto</p>
+                <p className="font-body text-[11px] uppercase tracking-[0.34em] text-slate-500">
+                  Precision automotriz
+                </p>
               </div>
             </div>
-            <p className="text-sm leading-relaxed text-blue-100">
-              Plataforma de repuestos automotrices con foco en conversion, confianza y cobertura en Honduras.
+
+            <p className="max-w-xs text-sm leading-7 text-slate-300">
+              Repuestos, asesoria tecnica y compatibilidad real para talleres, flotillas y
+              conductores en Honduras.
             </p>
           </div>
 
           <div>
-            <h4 className="mb-4 text-lg font-semibold">Navegación</h4>
-            <ul className="space-y-2 text-sm text-blue-100">
-              {quickLinks.map((link) => (
-                <li key={link.to}>
-                  <Link to={link.to} className="transition hover:text-white">
-                    {link.label}
-                  </Link>
-                </li>
+            <h4 className="mb-5 font-headline text-[11px] font-bold uppercase tracking-[0.3em] text-white">
+              Navegacion
+            </h4>
+            <div className="space-y-3 text-sm text-slate-400">
+              {navigationLinks.map((link) => (
+                <Link key={link.to} to={link.to} className="block transition hover:text-blue-300">
+                  {link.label}
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
 
           <div>
-            <h4 className="mb-4 text-lg font-semibold">Legal</h4>
-            <ul className="space-y-2 text-sm text-blue-100">
-              {legalLinks.map((link) => (
-                <li key={link.to}>
-                  <Link to={link.to} className="transition hover:text-white">
-                    {link.label}
-                  </Link>
-                </li>
+            <h4 className="mb-5 font-headline text-[11px] font-bold uppercase tracking-[0.3em] text-white">
+              Empresa
+            </h4>
+            <div className="space-y-3 text-sm text-slate-400">
+              {companyLinks.map((link) => (
+                <Link key={link.to} to={link.to} className="block transition hover:text-blue-300">
+                  {link.label}
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
 
-          <div id="contacto">
-            <h4 className="mb-4 text-lg font-semibold">Contacto</h4>
-            <div className="space-y-3 text-sm text-blue-100">
+          <div>
+            <h4 className="mb-5 font-headline text-[11px] font-bold uppercase tracking-[0.3em] text-white">
+              Soporte
+            </h4>
+            <div className="space-y-3 text-sm text-slate-400">
+              {supportLinks.map((link) => (
+                <Link key={link.label} to={link.to} className="block transition hover:text-blue-300">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-6 flex items-center gap-3">
+              <a
+                href="https://www.facebook.com/p/Reauto-100086985931443/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-slate-300 transition hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300"
+                aria-label="Facebook"
+              >
+                <Icon name="facebook" className="h-4 w-4" />
+              </a>
+              <a
+                href="https://www.instagram.com/reauto22/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-slate-300 transition hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300"
+                aria-label="Instagram"
+              >
+                <Icon name="instagram" className="h-4 w-4" />
+              </a>
               <a
                 href="https://wa.me/50495206007"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block transition hover:text-white"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-slate-300 transition hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300"
+                aria-label="WhatsApp"
               >
-                +504 9520-6007
+                <Icon name="whatsapp" className="h-4 w-4" />
               </a>
-              <p>San Pedro Sula, Cortés, Honduras</p>
-              <div className="flex gap-3 pt-2">
-                <a
-                  href="https://www.facebook.com/p/Reauto-100086985931443/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-lg border border-white/20 px-3 py-2 text-xs font-semibold transition hover:bg-white/10"
-                >
-                  Facebook
-                </a>
-                <a
-                  href="https://www.instagram.com/reauto22/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-lg border border-white/20 px-3 py-2 text-xs font-semibold transition hover:bg-white/10"
-                >
-                  Instagram
-                </a>
-              </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/15 pt-6 text-center text-sm text-blue-100">
-          <p>
-            © {currentYear} ReAuto. Todos los derechos reservados.
-          </p>
-          <p className="mt-2">Base preparada para SEO técnico, captación y monetización futura.</p>
+        <div className="flex flex-col gap-4 px-1 py-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="text-sm text-slate-500">
+            © {currentYear} ReAuto. Datos pensados para compatibilidad, respuesta rapida y
+            conversion.
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4 text-[11px] uppercase tracking-[0.24em] text-slate-500">
+            <span className="inline-flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-blue-400" />
+              Sistema activo
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-blue-400" />
+              Cobertura Honduras
+            </span>
+            <span className="rounded-full border border-white/10 px-3 py-1">OEM</span>
+            <span className="rounded-full border border-white/10 px-3 py-1">24H</span>
+          </div>
         </div>
       </div>
     </footer>

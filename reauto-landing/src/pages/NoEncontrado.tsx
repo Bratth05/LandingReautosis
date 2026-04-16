@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import Seo from '../components/Seo';
+import { Icon, Seo } from '../components';
 
 export default function NoEncontrado() {
   return (
-    <section className="bg-white py-24">
+    <>
       <Seo
         title="Pagina no encontrada"
         description="La pagina que buscas no existe. Regresa al inicio de ReAuto."
@@ -12,24 +12,41 @@ export default function NoEncontrado() {
         noIndex
       />
 
-      <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#1E4FA2]">
-          Error 404
-        </p>
-        <h1 className="mt-4 text-4xl font-extrabold text-slate-900 md:text-5xl">
-          Esta pagina no esta disponible
-        </h1>
-        <p className="mt-4 text-slate-600">
-          El enlace puede estar roto o la URL fue cambiada. Puedes continuar desde el inicio.
-        </p>
+      <main className="bg-[#f3f4f8]">
+        <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+          <section className="rounded-[36px] border border-slate-200 bg-slate-950 px-6 py-16 text-white shadow-[0_24px_60px_rgba(15,23,42,0.10)] md:px-10 md:py-20">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="font-headline text-[11px] font-bold uppercase tracking-[0.36em] text-blue-300">
+                Error 404
+              </p>
+              <h1 className="mt-6 font-headline text-4xl font-bold uppercase tracking-tight md:text-6xl">
+                Esta ruta no esta disponible.
+              </h1>
+              <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
+                El enlace pudo cambiar o la vista ya no existe. Te devolvemos al punto de entrada
+                principal para seguir navegando.
+              </p>
 
-        <Link
-          to="/inicio"
-          className="mt-8 inline-flex rounded-xl bg-[#0B1E4A] px-6 py-3 font-semibold text-white transition hover:bg-[#102C68]"
-        >
-          Volver al inicio
-        </Link>
-      </div>
-    </section>
+              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <Link
+                  to="/inicio"
+                  className="inline-flex items-center gap-3 rounded-2xl bg-blue-700 px-6 py-4 font-headline text-[11px] font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-blue-600"
+                >
+                  <span>Volver al inicio</span>
+                  <Icon name="arrow-right" className="h-4 w-4" />
+                </Link>
+
+                <Link
+                  to="/contacto"
+                  className="inline-flex items-center gap-3 rounded-2xl border border-white/15 bg-white/8 px-6 py-4 font-headline text-[11px] font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-white/14"
+                >
+                  Contactar soporte
+                </Link>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </>
   );
 }

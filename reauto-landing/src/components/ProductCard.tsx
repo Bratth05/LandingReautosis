@@ -1,3 +1,7 @@
+import { useState } from 'react';
+
+import Icon from './Icon';
+
 interface ProductCardProps {
   id: string;
   title: string;
@@ -8,11 +12,27 @@ interface ProductCardProps {
   compatibility: string[];
 }
 
-const statusColor = {
-  'En Stock': 'bg-green-600',
-  'Pedido Especial': 'bg-blue-600',
-  Disponible: 'bg-slate-600',
+const statusClassName = {
+  'En Stock': 'bg-emerald-50 text-emerald-700',
+  'Pedido Especial': 'bg-amber-50 text-amber-700',
+  Disponible: 'bg-slate-100 text-slate-700',
 };
+
+const placeholderTone = {
+  'turbo-vx450': 'from-slate-900 via-blue-950 to-slate-900',
+  'piston-kit-8': 'from-slate-900 via-slate-800 to-blue-950',
+  'camshaft-stage2': 'from-blue-950 via-slate-900 to-slate-950',
+};
+
+function getTagClassName(tag: string) {
+  const value = tag.toLowerCase();
+
+  if (value.includes('extra') || value.includes('no ')) {
+    return 'bg-red-50 text-red-700';
+  }
+
+  return 'bg-slate-100 text-slate-600';
+}
 
 export default function ProductCard({
   id,
@@ -23,56 +43,76 @@ export default function ProductCard({
   specs,
   compatibility,
 }: ProductCardProps) {
+  const [hasImageError, setHasImageError] = useState(false);
+
   return (
-    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex flex-col rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-      {/* Image Section */}
-      <div className="h-72 overflow-hidden relative bg-slate-100 dark:bg-slate-700">
-        <img
-          alt={title}
-          className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-          src={image}
-        />
-        <div className="absolute top-4 right-4">
-          <span className={`${statusColor[status]} text-white font-headline text-xs font-bold px-4 py-2 uppercase tracking-wider rounded`}>
-            {status}
-          </span>
-        </div>
+    <article className="group flex h-full flex-col overflow-hidden rounded-[30px] border border-slate-200 bg-white shadow-[0_16px_34px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_28px_60px_rgba(37,99,235,0.10)]">
+      <div className="relative h-60 overflow-hidden bg-slate-100">
+        {!hasImageError ? (
+          <img
+            alt={title}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            src={image}
+            onError={() => setHasImageError(true)}
+          />
+        ) : (
+          <div
+            className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${placeholderTone[id as keyof typeof placeholderTone] ?? 'from-slate-900 to-blue-950'}`}
+          >
+            <div className="rounded-[26px] border border-white/10 bg-white/5 px-6 py-5 text-center backdrop-blur-sm">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-blue-300">
+                <Icon name="catalog" className="h-6 w-6" />
+              </div>
+              <p className="mt-4 font-headline text-[11px] font-bold uppercase tracking-[0.28em] text-slate-300">
+                Repuesto tecnico
+              </p>
+            </div>
+          </div>
+        )}
+
+        <span
+          className={`absolute left-5 top-5 inline-flex rounded-full px-3 py-1 font-headline text-[10px] font-bold uppercase tracking-[0.2em] ${statusClassName[status]}`}
+        >
+          {status}
+        </span>
       </div>
 
-      {/* Content Section */}
-      <div className="p-8 flex flex-col flex-1">
-        {/* Title & OEM */}
-        <div className="flex justify-between items-start mb-6">
-          <h3 className="font-headline font-bold text-2xl text-slate-900 dark:text-white leading-tight">
-            {title}
-          </h3>
-          <span className="font-headline text-xs text-blue-600 dark:text-blue-400 font-bold px-3 py-1 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded">
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p className="font-headline text-[10px] font-bold uppercase tracking-[0.28em] text-slate-400">
+              Linea destacada
+            </p>
+            <h3 className="mt-3 font-headline text-[1.9rem] font-bold leading-[1.05] tracking-tight text-slate-950">
+              {title}
+            </h3>
+          </div>
+
+          <span className="inline-flex shrink-0 rounded-full border border-blue-200 bg-blue-50 px-3 py-2 font-headline text-[11px] font-bold uppercase tracking-[0.16em] text-blue-700">
             OEM #{oemNumber}
           </span>
         </div>
 
-        {/* Specs Grid */}
-        <div className="grid grid-cols-2 gap-6 mb-8 py-6 bg-slate-50 dark:bg-slate-700/50 px-6 rounded-lg">
-          {specs.map((spec, idx) => (
-            <div key={idx}>
-              <p className="text-xs font-headline text-slate-600 dark:text-slate-400 uppercase tracking-wider font-bold mb-2">
+        <div className="mt-6 grid grid-cols-2 gap-3 rounded-[24px] bg-slate-50 p-4">
+          {specs.map((spec) => (
+            <div key={`${title}-${spec.label}`} className="rounded-2xl bg-white px-4 py-3">
+              <p className="font-headline text-[9px] font-bold uppercase tracking-[0.24em] text-slate-400">
                 {spec.label}
               </p>
-              <p className="text-base font-bold text-slate-900 dark:text-white">{spec.value}</p>
+              <p className="mt-2 text-base font-semibold text-slate-950">{spec.value}</p>
             </div>
           ))}
         </div>
 
-        {/* Compatibility Tags */}
-        <div className="mb-8">
-          <p className="text-xs font-headline text-slate-600 dark:text-slate-400 uppercase tracking-wider font-bold mb-3">
+        <div className="mt-6">
+          <p className="font-headline text-[10px] font-bold uppercase tracking-[0.28em] text-slate-400">
             Compatibilidad
           </p>
-          <div className="flex flex-wrap gap-2">
-            {compatibility.map((tag, idx) => (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {compatibility.map((tag) => (
               <span
-                key={idx}
-                className="bg-blue-100 dark:bg-blue-900/30 text-blue-900 dark:text-blue-200 text-xs px-3 py-1 rounded-full font-medium"
+                key={`${title}-${tag}`}
+                className={`rounded-full px-3 py-1.5 text-[11px] ${getTagClassName(tag)}`}
               >
                 {tag}
               </span>
@@ -80,13 +120,24 @@ export default function ProductCard({
           </div>
         </div>
 
-        {/* Button */}
-        <div className="mt-auto border-t border-slate-200 dark:border-slate-600 pt-4">
-          <button className="w-full bg-slate-900 dark:bg-blue-600 text-white font-headline text-xs font-bold uppercase tracking-widest py-3 hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors rounded">
-            Hoja Técnica
-          </button>
+        <div className="mt-auto pt-6">
+          <div className="flex gap-3">
+            <button
+              type="button"
+              className="flex-1 rounded-2xl bg-slate-950 px-4 py-3 font-headline text-[11px] font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-blue-700"
+            >
+              Hoja tecnica
+            </button>
+            <button
+              type="button"
+              className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 text-blue-700 transition-colors hover:border-blue-200 hover:bg-blue-50"
+              aria-label={`Ver ${title}`}
+            >
+              <Icon name="eye" className="h-5 w-5" />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

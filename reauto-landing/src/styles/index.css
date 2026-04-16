@@ -12,14 +12,14 @@
 /* 2. Tipografía y Fuentes */
 @import './typography.css';
 
-/* 3. Tailwind CSS (Framework principal) */
-@import 'tailwindcss';
-
-/* 4. Estilos Globales */
+/* 3. Estilos Globales */
 @import './global.css';
 
-/* 5. Utilidades Compartidas */
+/* 4. Utilidades Compartidas */
 @import './utilities.css';
+
+/* 5. Tailwind CSS (Framework principal) */
+@import 'tailwindcss';
 
 /* ============================================
    FIN DE IMPORTACIONES DE ESTILOS

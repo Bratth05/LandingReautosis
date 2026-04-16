@@ -3,6 +3,7 @@ export { default as Header } from './Header';
 export { default as Footer } from './Footer';
 export { default as WhatsAppButton } from './WhatsAppButton';
 export { default as Seo } from './Seo';
+export { default as Icon } from './Icon';
 
 // Componentes Reutilizables
 export { default as HeroSection } from './HeroSection';

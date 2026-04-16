@@ -35,7 +35,7 @@ function ScrollManager() {
 
 function SiteLayout() {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-white flex flex-col">
+    <div className="flex min-h-screen flex-col bg-[#f3f4f8] text-slate-950">
       <Header />
       <ScrollManager />
       <main className="flex-1">

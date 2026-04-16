@@ -12,20 +12,21 @@ export default function SectionHeader({
   subtitle,
 }: SectionHeaderProps) {
   return (
-    <div className="mb-8 md:mb-12 border-b border-slate-300 dark:border-slate-700 pb-4 md:pb-6">
-      {label && (
-        <span className="font-headline text-blue-600 dark:text-blue-400 text-xs font-bold tracking-widest uppercase">
-          {label}
-        </span>
-      )}
-      <h2 className="font-headline text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 uppercase tracking-tight">
-        {title}
-      </h2>
-      {description && (
-        <p className="mt-4 text-slate-600 dark:text-slate-400 max-w-3xl">{description}</p>
-      )}
+    <div className="mb-8 flex flex-col gap-4 border-b border-slate-200 pb-5 md:mb-10 md:flex-row md:items-end md:justify-between md:gap-10">
+      <div className="max-w-3xl">
+        {label && (
+          <span className="font-headline text-[11px] font-bold uppercase tracking-[0.34em] text-blue-700">
+            {label}
+          </span>
+        )}
+        <h2 className="mt-3 font-headline text-3xl font-bold uppercase tracking-tight text-slate-950 md:text-4xl">
+          {title}
+        </h2>
+        {description && <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">{description}</p>}
+      </div>
+
       {subtitle && (
-        <p className="text-right text-xs md:text-sm text-slate-600 dark:text-slate-400 uppercase tracking-widest">
+        <p className="font-headline text-[11px] uppercase tracking-[0.28em] text-slate-400 md:max-w-xs md:text-right">
           {subtitle}
         </p>
       )}

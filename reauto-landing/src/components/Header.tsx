@@ -1,109 +1,146 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import Icon from './Icon';
+
+const navItems = [
+  { label: 'Inicio', to: '/inicio' },
+  { label: 'Catalogo', to: '/inicio#productos' },
+  { label: 'Contacto', to: '/contacto' },
+  { label: 'Sobre nosotros', to: '/sobre-nosotros' },
+];
+
+const whatsappHref =
+  'https://wa.me/50495206007?text=Hola%20ReAuto,%20quiero%20cotizar%20repuestos%20para%20mi%20vehiculo';
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-
-  const navItems = [
-    { label: 'Inicio', to: '/inicio' },
-    { label: 'Contacto', to: '/contacto' },
-    { label: 'Sobre Nosotros', to: '/sobre-nosotros' },
-  ];
-
-  const isActive = (to: string) => location.pathname === to;
 
   const closeMenu = () => {
     setIsOpen(false);
   };
 
+  const isActive = (to: string) => {
+    const [pathname, hash] = to.split('#');
+
+    if (hash) {
+      return location.pathname === pathname && location.hash === `#${hash}`;
+    }
+
+    return location.pathname === pathname;
+  };
+
   return (
-    <header className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm">
-      <nav className="mx-auto max-w-full px-6 lg:px-12">
-        <div className="flex h-14 items-center justify-between">
-          {/* Logo */}
-          <Link to="/inicio" className="flex items-center gap-2 flex-shrink-0" onClick={closeMenu}>
-            <div className="flex h-8 w-8 items-center justify-center rounded bg-blue-600">
-              <span className="text-white font-bold text-sm">R</span>
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+        <div className="flex min-w-0 items-center gap-5 lg:gap-8">
+          <Link to="/inicio" className="group flex items-center gap-3" onClick={closeMenu}>
+            <div className="flex h-12 w-12 items-center justify-center rounded-[18px] bg-blue-700 text-white shadow-[0_12px_28px_rgba(37,99,235,0.24)] transition-transform duration-300 group-hover:scale-[1.03]">
+              <span className="font-headline text-lg font-bold">R</span>
             </div>
-            <div className="hidden sm:block">
-              <h1 className="text-sm font-bold text-slate-900 dark:text-white">ReAuto</h1>
+
+            <div className="min-w-0">
+              <p className="font-headline text-2xl font-bold uppercase tracking-tight text-slate-950">
+                ReAuto
+              </p>
+              <p className="font-body text-[11px] uppercase tracking-[0.36em] text-slate-500">
+                Repuestos tecnicos
+              </p>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden items-center gap-6 lg:flex">
             {navItems.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 onClick={closeMenu}
-                className={`text-sm font-semibold transition ${
+                className={`border-b-2 px-1 pb-1 font-headline text-sm font-semibold uppercase tracking-[0.18em] transition-colors ${
                   isActive(item.to)
-                    ? 'text-blue-600 dark:text-blue-400'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    ? 'border-blue-600 text-blue-700'
+                    : 'border-transparent text-slate-600 hover:text-slate-950'
                 }`}
               >
                 {item.label}
               </Link>
             ))}
           </div>
-
-          {/* WhatsApp CTA */}
-          <a
-            href="https://wa.me/50495206007?text=Hola%20ReAuto,%20me%20gustaría%20conocer%20más%20de%20sus%20repuestos"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition"
-          >
-            WhatsApp
-          </a>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-slate-700 dark:text-slate-300"
-            aria-label="Menú"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
         </div>
 
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="lg:hidden border-t border-slate-200 dark:border-slate-800 py-3 space-y-2">
+        <div className="hidden items-center gap-3 lg:flex">
+          <Link
+            to="/contacto"
+            className="group flex min-w-[20rem] items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-500 transition-colors hover:border-blue-200 hover:bg-white hover:text-slate-700"
+          >
+            <span>Busca por pieza, VIN o marca...</span>
+            <Icon
+              name="search"
+              className="h-4 w-4 text-slate-400 transition-colors group-hover:text-blue-600"
+            />
+          </Link>
+
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center gap-2 rounded-2xl bg-slate-950 px-5 py-3 font-headline text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-blue-700"
+          >
+            <Icon name="whatsapp" className="h-4 w-4" />
+            Cotizar
+          </a>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIsOpen((prev) => !prev)}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 text-slate-700 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 lg:hidden"
+          aria-label={isOpen ? 'Cerrar menu' : 'Abrir menu'}
+        >
+          <Icon name={isOpen ? 'close' : 'menu'} className="h-5 w-5" />
+        </button>
+      </nav>
+
+      {isOpen && (
+        <div className="border-t border-slate-200 bg-white px-4 py-4 sm:px-6 lg:hidden">
+          <div className="mx-auto max-w-7xl space-y-2">
             {navItems.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 onClick={closeMenu}
-                className={`block px-4 py-2 text-sm font-medium rounded transition ${
+                className={`block rounded-2xl border px-4 py-3 font-headline text-xs font-semibold uppercase tracking-[0.2em] transition-colors ${
                   isActive(item.to)
-                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
-                    : 'text-slate-700 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                    ? 'border-blue-200 bg-blue-50 text-blue-700'
+                    : 'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:bg-white'
                 }`}
               >
                 {item.label}
               </Link>
             ))}
+
+            <Link
+              to="/contacto"
+              onClick={closeMenu}
+              className="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600"
+            >
+              <span>Buscar repuesto o compatibilidad</span>
+              <Icon name="search" className="h-4 w-4" />
+            </Link>
+
             <a
-              href="https://wa.me/50495206007?text=Hola%20ReAuto,%20me%20gustaría%20conocer%20más%20de%20sus%20repuestos"
+              href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full text-center text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition"
               onClick={closeMenu}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-3 font-headline text-xs font-bold uppercase tracking-[0.2em] text-white"
             >
+              <Icon name="whatsapp" className="h-4 w-4" />
               Contactar por WhatsApp
             </a>
           </div>
-        )}
-      </nav>
+        </div>
+      )}
     </header>
   );
 }
