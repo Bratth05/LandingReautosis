@@ -29,8 +29,12 @@ export default function Footer() {
         <div className="grid gap-10 rounded-[32px] border border-white/10 bg-white/5 p-8 backdrop-blur-sm md:grid-cols-4">
           <div className="md:col-span-1">
             <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-[18px] bg-blue-600/15 text-blue-300">
-                <span className="font-headline text-xl font-bold">R</span>
+              <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-[18px] border border-slate-200 bg-white shadow-[0_10px_22px_rgba(15,23,42,0.18)]">
+                <img
+                  src="/logo-reauto.png"
+                  alt="Logo de ReAuto"
+                  className="h-full w-full object-cover"
+                />
               </div>
               <div>
                 <p className="font-headline text-3xl font-bold tracking-tight text-blue-300">ReAuto</p>

@@ -48,35 +48,36 @@ export default function Inicio() {
       />
 
       <main className="min-h-screen bg-[#f3f4f8]">
-        {/* ─── Contenedor con márgenes laterales generosos ─── */}
         <div className="mx-auto w-full max-w-[1400px] px-6 py-10 sm:px-10 md:px-14 lg:px-20 xl:px-24">
           <div className="flex flex-col gap-14">
-
-            {/* ═══════════════ HERO ═══════════════ */}
             <HeroSection
-              eyebrow="Base tecnica ReAuto"
-              title="Precision"
-              subtitle="garantizada."
-              description="Accede a una seleccion de repuestos pensada para compatibilidad real. Cada componente se presenta con ficha clara, enfoque OEM y soporte comercial para Honduras."
+              eyebrow="Re-Auto"
+              title="Repuestos y accesorios con"
+              subtitle="calidad."
+              description="Entrega de repuestos en San Pedro Sula y envios a todo Honduras. Catalogo de repuestos y cotizaciones."
               bgImage={heroImage}
+              brandLogoSrc="/logo-reauto.png"
+              brandLogoAlt="Logo ReAuto"
+              brandLabel="Marca destacada"
+              brandDescription="Repuestos para todos los vehiculos, con garantia de compatibilidad."
               actions={[
-                { label: 'Catalogo tecnico', href: '#productos', isPrimary: true },
+                { label: 'Catalogo', href: '#productos', isPrimary: true },
                 { label: 'Verificar compatibilidad', href: '/contacto' },
               ]}
               stats={[
-                { label: 'Respuesta', value: '< 1 hora' },
-                { label: 'Cobertura', value: 'Honduras' },
+                { label: 'Servicio de Entrega en SPS', value: '- de 1 hora' },
+                { label: 'Cobertura', value: 'Todo Honduras' },
                 { label: 'Inventario', value: `${PRODUCTS.length}+ lineas` },
               ]}
             />
 
-            {/* ═══════════════ ACCESO RÁPIDO ═══════════════ */}
             <section aria-label="Acceso rapido" className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-              {quickAccessItems.map((item) => (
+              {quickAccessItems.map((item, index) => (
                 <a
                   key={item.title}
                   href={item.href}
-                  className="group rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_20px_50px_rgba(37,99,235,0.10)]"
+                  className="animate-rise-in group rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_20px_50px_rgba(37,99,235,0.10)]"
+                  style={{ animationDelay: `${120 + index * 90}ms` }}
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 transition-colors duration-300 group-hover:bg-blue-700 group-hover:text-white">
                     <Icon name={item.icon} className="h-5 w-5" />
@@ -89,10 +90,10 @@ export default function Inicio() {
               ))}
             </section>
 
-            {/* ═══════════════ SERVICIOS ═══════════════ */}
             <section
               id="servicios"
-              className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.04)]"
+              className="animate-rise-in overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.04)]"
+              style={{ animationDelay: '240ms' }}
             >
               <div className="p-8 md:p-10 lg:p-12">
                 <SectionHeader
@@ -103,39 +104,52 @@ export default function Inicio() {
                 />
 
                 <div className="grid gap-6 md:grid-cols-3">
-                  {SERVICES.map((service) => (
-                    <ServiceCard key={service.title} {...service} />
+                  {SERVICES.map((service, index) => (
+                    <div
+                      key={service.title}
+                      className="animate-rise-in"
+                      style={{ animationDelay: `${320 + index * 100}ms` }}
+                    >
+                      <ServiceCard {...service} />
+                    </div>
                   ))}
                 </div>
               </div>
             </section>
 
-            {/* ═══════════════ PRODUCTOS ═══════════════ */}
             <section
               id="productos"
-              className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.04)]"
+              className="animate-rise-in overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.04)]"
+              style={{ animationDelay: '320ms' }}
             >
               <div className="p-8 md:p-10 lg:p-12">
                 <SectionHeader
                   label="Indice de categoria"
                   title="Catalogo de repuestos"
                   description="Tarjetas mas limpias, mejor aire visual y una lectura tecnica mas ordenada para cada componente."
-                  subtitle={`Mostrando 1–${PRODUCTS.length} de ${PRODUCTS.length} componentes`}
+                  subtitle={`Mostrando 1-${PRODUCTS.length} de ${PRODUCTS.length} componentes`}
                 />
 
                 <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-                  {PRODUCTS.map((product) => (
-                    <ProductCard key={product.id} {...product} />
+                  {PRODUCTS.map((product, index) => (
+                    <div
+                      key={product.id}
+                      className="animate-rise-in"
+                      style={{ animationDelay: `${420 + index * 110}ms` }}
+                    >
+                      <ProductCard {...product} />
+                    </div>
                   ))}
                 </div>
               </div>
 
-              {/* ── Tabla de compatibilidad ── */}
-              <div className="border-t border-slate-200 bg-slate-50/60 p-8 md:p-10 lg:p-12">
+              <div
+                className="animate-rise-in border-t border-slate-200 bg-slate-50/60 p-8 md:p-10 lg:p-12"
+                style={{ animationDelay: '520ms' }}
+              >
                 <CompatibilityTable rows={COMPATIBILITY_TABLE_DATA} />
               </div>
             </section>
-
           </div>
         </div>
       </main>

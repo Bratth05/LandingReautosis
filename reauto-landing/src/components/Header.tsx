@@ -36,13 +36,17 @@ export default function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-center gap-5 lg:gap-8">
           <Link to="/inicio" className="group flex items-center gap-3" onClick={closeMenu}>
-            <div className="flex h-12 w-12 items-center justify-center rounded-[18px] bg-blue-700 text-white shadow-[0_12px_28px_rgba(37,99,235,0.24)] transition-transform duration-300 group-hover:scale-[1.03]">
-              <span className="font-headline text-lg font-bold">R</span>
+            <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-[18px] border border-slate-200 bg-white shadow-[0_12px_28px_rgba(15,23,42,0.10)] transition-transform duration-300 group-hover:scale-[1.03]">
+              <img
+                src="/logo-reauto.png"
+                alt="Logo de ReAuto"
+                className="h-full w-full object-cover"
+              />
             </div>
 
             <div className="min-w-0">
               <p className="font-headline text-2xl font-bold uppercase tracking-tight text-slate-950">
-                ReAuto
+                Re-Auto
               </p>
               <p className="font-body text-[11px] uppercase tracking-[0.36em] text-slate-500">
                 Repuestos y Accesorios

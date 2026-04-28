@@ -43,6 +43,55 @@
   }
 }
 
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes heroPan {
+  0% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.1) translate3d(-2%, 2%, 0);
+  }
+}
+
+@keyframes floatSoft {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes orbDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.45;
+  }
+  100% {
+    transform: translate3d(20px, -22px, 0) scale(1.12);
+    opacity: 0.72;
+  }
+}
+
+@keyframes gridPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
 .animate-slideInUp {
   animation: slideInUp 0.5s ease-out;
 }
@@ -57,6 +106,27 @@
 
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-rise-in {
+  animation: riseIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-hero-pan {
+  animation: heroPan 16s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+.animate-float-soft {
+  animation: floatSoft 6s ease-in-out infinite;
+}
+
+.animate-orb-drift {
+  animation: orbDrift 10s ease-in-out infinite alternate;
+}
+
+.animate-grid-pulse {
+  animation: gridPulse 10s ease-in-out infinite;
 }
 
 /* Flexbox Utilities */
@@ -320,4 +390,18 @@
 .btn-lg {
   padding: var(--spacing-lg) var(--spacing-xl);
   font-size: 1.125rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-slideInUp,
+  .animate-slideInDown,
+  .animate-fadeIn,
+  .animate-pulse,
+  .animate-rise-in,
+  .animate-hero-pan,
+  .animate-float-soft,
+  .animate-orb-drift,
+  .animate-grid-pulse {
+    animation: none !important;
+  }
 }
